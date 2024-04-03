@@ -1,0 +1,6 @@
+@ScriveAPI_HostAddress = http://localhost:5262
+
+GET {{ScriveAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
