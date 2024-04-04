@@ -83,7 +83,7 @@ namespace ScriveAPI.Services
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256)
             ));
 
-            return new AuthResponse { User = user, Token = token };
+            return new AuthResponse { Id = user.Id, Username = user.Username, Email = user.Email, ProfilePicture = user.ProfilePicture, Token = token };
         }
         public async Task<User> GetUser(string token)
         {

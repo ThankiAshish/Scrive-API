@@ -1,4 +1,5 @@
 using System.Text;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -12,6 +13,15 @@ using ScriveAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    var frontendUrl = builder.Configuration["FrontendUrl"];
+    options.AddPolicy("AllowFrontend",
+        builder => builder.WithOrigins(frontendUrl)
+                            .AllowAnyHeader()
+                            .AllowAnyMethod());
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -84,10 +94,11 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseCors("AllowFrontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Add Swagger middleware
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

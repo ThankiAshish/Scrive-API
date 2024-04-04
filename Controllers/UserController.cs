@@ -23,21 +23,21 @@ namespace ScriveAPI.Controllers
             try
             {
                 var registeredUser = await _userServices.Register(user.Username, user.Email, user.Password, user.ProfilePicture);
-                return Ok(registeredUser);
+                return Ok(new { message = "Registration Successful", registeredUser, status = 201 });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message); 
             }
         }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             try
             {
                 var response = await _userServices.Login(request.Email, request.Password);
-                return Ok(response);
+                
+                return Ok(new { message = "Login Successful", response, status = 200 });
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace ScriveAPI.Controllers
                 }
 
                 var user = await _userServices.GetUser(token);
-                return Ok(user);
+                return Ok(new { message = "User Fetched Successfully!", user, status = 200 });
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace ScriveAPI.Controllers
                 }
 
                 var updatedUser = await _userServices.UpdateUser(token, request.Username, request.Email);
-                return Ok(updatedUser);
+                return Ok(new { message = "User Updated Successfully", user = updatedUser, status = 200 });
             }
             catch (Exception ex)
             {
@@ -103,7 +103,7 @@ namespace ScriveAPI.Controllers
 
                 var user = await _userServices.DeleteUser(token);
 
-                return Ok(user);
+                return Ok(new { message = "User Deleted Successfully", user, status = 200 });
             }
             catch (Exception ex)
             {

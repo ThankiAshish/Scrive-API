@@ -20,7 +20,7 @@ namespace ScriveAPI.Controllers
             try
             {
                 var blogs = await _blogServices.GetAll();
-                return Ok(blogs);
+                return Ok(new { message = "Blogs Fetched Successfully!", blogs, status = 200 });
             }
             catch (Exception ex)
             {
@@ -33,7 +33,7 @@ namespace ScriveAPI.Controllers
             try
             {
                 var blog = _blogServices.GetById(id);
-                return Ok(blog);
+                return Ok(new { message = "Blog Fetched Successfully!", blog = blog.Result, status = 200 });
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -47,7 +47,7 @@ namespace ScriveAPI.Controllers
                 var token = Request.Headers["x-auth-token"].ToString();
 
                 var blog = await _blogServices.Create(token, model.Title, model.Summary, model.Cover, model.Content);
-                return Ok(blog);
+                return Ok(new { message = "Blog Created Successfully!", blog, status = 200 });
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace ScriveAPI.Controllers
                 var token = Request.Headers["x-auth-token"].ToString();
 
                 var blog = await _blogServices.Update(id, token, model.Title, model.Summary, model.Cover, model.Content);
-                return Ok(blog);
+                return Ok(new { message = "Blog Updated Successfully!", blog, status = 200 });
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace ScriveAPI.Controllers
 
                 var blog = await _blogServices.Delete(id, token);
 
-                return Ok(blog);
+                return Ok(new { message = "Blog Deleted Successfully!", blog, status = 200 });
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
