@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ScriveAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29e5e44c3bc385024de4b9f7dd040ab000be39c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("ScriveAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ScriveAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

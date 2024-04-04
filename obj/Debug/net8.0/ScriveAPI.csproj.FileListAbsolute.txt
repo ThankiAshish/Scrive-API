@@ -53,3 +53,5 @@ C:\Users\Ashish\Documents\Projects\ScriveAPI\obj\Debug\net8.0\ScriveAPI.pdb
 C:\Users\Ashish\Documents\Projects\ScriveAPI\obj\Debug\net8.0\ScriveAPI.genruntimeconfig.cache
 C:\Users\Ashish\Documents\Projects\ScriveAPI\obj\Debug\net8.0\ref\ScriveAPI.dll
 C:\Users\Ashish\Documents\Projects\ScriveAPI\bin\Debug\net8.0\libman.json
+C:\Users\Ashish\Documents\Projects\ScriveAPI\obj\Debug\net8.0\ScriveAPI.sourcelink.json
+C:\Users\Ashish\Documents\Projects\ScriveAPI\bin\Debug\net8.0\ScriveAPI.staticwebassets.runtime.json

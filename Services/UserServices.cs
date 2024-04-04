@@ -5,10 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using ScriveAPI.Data;
 using ScriveAPI.Models;
-using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.Net.Mail;
-using System.Net;
+using ScriveAPI.Helpers;
 
 namespace ScriveAPI.Services
 {
@@ -17,12 +15,14 @@ namespace ScriveAPI.Services
         private readonly UserContext _dbContext;
         private readonly IMongoCollection<User> _users;
         private readonly IConfiguration _configuration;
+        private readonly TokenValidator _tokenValidator;
 
-        public UserServices(UserContext dbContext, IMongoCollection<User> users, IConfiguration configuration)
+        public UserServices(UserContext dbContext, IMongoCollection<User> users, IConfiguration configuration, TokenValidator tokenValidator)
         {
             _dbContext = dbContext;
             _users = users;
             _configuration = configuration;
+            _tokenValidator = tokenValidator;
         }
         public async Task<User> Register(string username, string email, string password, string profilePicture)
         {
@@ -85,54 +85,89 @@ namespace ScriveAPI.Services
 
             return new AuthResponse { User = user, Token = token };
         }
-        public async Task<User> GetUser(string id)
+        public async Task<User> GetUser(string token)
         {
-            var user = await _users.FindAsync(u => u.Id == id).Result.FirstOrDefaultAsync();
+            string userId = String.Empty;
 
-            if (user == null)
+            try
             {
-                throw new Exception("User not found");
+                userId = _tokenValidator.ExtractUserIdFromToken(token);
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            var user = await _users.FindAsync(u => u.Id == userId).Result.FirstOrDefaultAsync();
+
+            if(user == null)
+            {
+                throw new Exception("User not Found!");
             }
 
             user.Password = String.Empty;
 
             return user;
         }
-        public async Task<User> UpdateUser(string id, string username, string email)
+        public async Task<User> UpdateUser(string token, string username, string email)
         {
-            var user = await _users.FindAsync(u => u.Id == id).Result.FirstOrDefaultAsync();
-
-            if (user == null)
+            try
             {
-                throw new Exception("User not found");
-            }
+                var userId = _tokenValidator.ExtractUserIdFromToken(token);
+                if (userId == null)
+                {
+                    throw new Exception("Invalid user ID in token");
+                }
 
-            if (!string.IsNullOrEmpty(username))
+                var user = await _users.FindAsync(u => u.Id == userId).Result.FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
+
+                if (!string.IsNullOrEmpty(username))
+                {
+                    user.Username = username;
+                }
+
+                if (!string.IsNullOrEmpty(email))
+                {
+                    user.Email = email;
+                }
+
+                await _users.ReplaceOneAsync(u => u.Id == userId, user);
+
+                user.Password = String.Empty;
+
+                return user;
+            }
+            catch (Exception ex)
             {
-                user.Username = username;
+                throw new Exception(ex.Message);
             }
-
-            if (!string.IsNullOrEmpty(email))
-            {
-                user.Email = email;
-            }
-
-            await _users.ReplaceOneAsync(u => u.Id == id, user);
-
-            return user;
         }
-        public async Task<User> DeleteUser(string id)
+        public async Task<User> DeleteUser(string token)
         {
-            var user = await _users.FindAsync(u => u.Id == id).Result.FirstOrDefaultAsync();
-
-            if (user == null)
+            try
             {
-                throw new Exception("User not found");
+                var userId = _tokenValidator.ExtractUserIdFromToken(token);
+                var user = await _users.FindAsync(u => u.Id == userId).Result.FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
+
+                await _users.DeleteOneAsync(u => u.Id == userId);
+
+                user.Password = String.Empty;
+
+                return user;
             }
-
-            await _users.DeleteOneAsync(u => u.Id == id);
-
-            return user;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public async Task<User> ForgotPassword(string email)
         {

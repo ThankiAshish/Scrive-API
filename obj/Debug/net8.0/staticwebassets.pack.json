@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\uploads\\covers\\6b97ff3b-9d69-4d80-ac1e-f2835d7e1366.png",
+      "PackagePath": "staticwebassets\\uploads\\covers\\6b97ff3b-9d69-4d80-ac1e-f2835d7e1366.png"
+    },
+    {
+      "Id": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\uploads\\covers\\FormulaOne_Hamilton_3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\covers\\FormulaOne_Hamilton_3.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ScriveAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ScriveAPI.props",
+      "PackagePath": "build\\ScriveAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ScriveAPI.props",
+      "PackagePath": "buildMultiTargeting\\ScriveAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ScriveAPI.props",
+      "PackagePath": "buildTransitive\\ScriveAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

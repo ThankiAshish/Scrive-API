@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Public\" />
+    <Folder Include="wwwroot\uploads\covers\" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,58 @@
 {
   "Version": 1,
-  "Hash": "sn9TeOcHklq4FIQUvA9GeCwpLy1k5/og3N3OJEIJMP0=",
+  "Hash": "8xAICI7XWd1fBryW+YJr7fMIpFoajnDL8wADVuZDmzo=",
   "Source": "ScriveAPI",
   "BasePath": "_content/ScriveAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "ScriveAPI\\wwwroot",
+      "Source": "ScriveAPI",
+      "ContentRoot": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\",
+      "BasePath": "_content/ScriveAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\uploads\\covers\\6b97ff3b-9d69-4d80-ac1e-f2835d7e1366.png",
+      "SourceId": "ScriveAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\",
+      "BasePath": "_content/ScriveAPI",
+      "RelativePath": "uploads/covers/6b97ff3b-9d69-4d80-ac1e-f2835d7e1366.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\covers\\6b97ff3b-9d69-4d80-ac1e-f2835d7e1366.png"
+    },
+    {
+      "Identity": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\uploads\\covers\\FormulaOne_Hamilton_3.jpg",
+      "SourceId": "ScriveAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ashish\\Documents\\Projects\\ScriveAPI\\wwwroot\\",
+      "BasePath": "_content/ScriveAPI",
+      "RelativePath": "uploads/covers/FormulaOne_Hamilton_3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\covers\\FormulaOne_Hamilton_3.jpg"
+    }
+  ]
 }

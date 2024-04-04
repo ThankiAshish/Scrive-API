@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using ScriveAPI.Data;
+using ScriveAPI.Helpers;
 using ScriveAPI.Models;
 using ScriveAPI.Services;
 
@@ -23,6 +24,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+
+builder.Services.AddSingleton<TokenValidator>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    return new TokenValidator(config["JwtSecret"]);
+});
 
 builder.Services.AddSingleton<IConfiguration>(sp =>
 {
@@ -49,8 +56,17 @@ builder.Services.AddScoped<IMongoCollection<User>>(sp =>
     return database.GetCollection<User>("users");
 });
 
+builder.Services.AddScoped<IMongoCollection<Blog>>(sp =>
+{
+    var database = sp.GetRequiredService<IMongoDatabase>();
+    return database.GetCollection<Blog>("blogs");
+});
+
 builder.Services.AddScoped<UserContext>();
 builder.Services.AddTransient<UserServices>();
+
+builder.Services.AddScoped<BlogContext>();
+builder.Services.AddScoped<BlogServices>();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -80,7 +96,7 @@ app.UseSwaggerUI(c =>
 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Public")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
     RequestPath = "/public"
 });
 

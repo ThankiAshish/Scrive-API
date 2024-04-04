@@ -32,5 +32,13 @@ namespace ScriveAPI.Models
         [Required(ErrorMessage = "Profile picture is required.")]
         [Column("profilePicture")]
         public string ProfilePicture { get; set; }
+
+        [BsonElement("createdAt")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CreatedAt { get; set; }
+
+        [BsonElement("updatedAt")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime UpdatedAt { get; set; }
     }
 }

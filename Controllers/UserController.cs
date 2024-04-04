@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using ScriveAPI.Helpers;
 using ScriveAPI.Models;
@@ -52,14 +51,14 @@ namespace ScriveAPI.Controllers
             try
             {
                 // Get user ID from request header (assuming "x-auth-user-id")
-                var userId = Request.Headers["x-auth-token"].FirstOrDefault();
+                var token = Request.Headers["x-auth-token"].FirstOrDefault();
 
-                if (string.IsNullOrEmpty(userId))
+                if (string.IsNullOrEmpty(token))
                 {
                     return BadRequest("Missing user ID in request header");
                 }
 
-                var user = await _userServices.GetUser(userId);
+                var user = await _userServices.GetUser(token);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -74,14 +73,14 @@ namespace ScriveAPI.Controllers
             try
             {
                 // Get user ID from request header (assuming "x-auth-user-id")
-                var userId = Request.Headers["x-auth-token"].FirstOrDefault();
+                var token = Request.Headers["x-auth-token"].FirstOrDefault();
 
-                if (string.IsNullOrEmpty(userId))
+                if (string.IsNullOrEmpty(token))
                 {
                     return BadRequest("Invalid user ID");
                 }
 
-                var updatedUser = await _userServices.UpdateUser(userId, request.Username, request.Email);
+                var updatedUser = await _userServices.UpdateUser(token, request.Username, request.Email);
                 return Ok(updatedUser);
             }
             catch (Exception ex)
@@ -95,14 +94,14 @@ namespace ScriveAPI.Controllers
         {
             try
             {
-                var userId = Request.Headers["x-auth-token"].FirstOrDefault();
+                var token = Request.Headers["x-auth-token"].FirstOrDefault();
 
-                if (string.IsNullOrEmpty(userId))
+                if (string.IsNullOrEmpty(token))
                 {
                     return BadRequest("Missing user ID in request header");
                 }
 
-                var user = await _userServices.DeleteUser(userId);
+                var user = await _userServices.DeleteUser(token);
 
                 return Ok(user);
             }
