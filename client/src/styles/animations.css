@@ -1,0 +1,26 @@
+@keyframes growLine {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 150px;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideToRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
